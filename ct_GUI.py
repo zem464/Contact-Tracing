@@ -45,6 +45,8 @@ vac4 = Checkbutton(ct, text = "Not yet")
 vac4.place(x = 60, y = 325)
 
 # Create the submit button
+submitting = Button(ct, text = "Submit")
+submitting.place(x = 280, y = 235)
 
 # Create the add button
 
