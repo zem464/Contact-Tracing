@@ -53,3 +53,4 @@ submitting.place(x = 280, y = 235)
 # Create the search button
 
 # Close the program
+ct.mainloop()
