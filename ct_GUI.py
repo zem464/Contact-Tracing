@@ -1,4 +1,6 @@
 # Import Tkinter
+import tkinter
+from tkinter import *
 
 # Assign the objects of Tkinter
 
