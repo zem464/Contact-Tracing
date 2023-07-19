@@ -1,6 +1,11 @@
 # Import Tkinter
 import tkinter
 from tkinter import *
+from ct_class import contact_tracing
+import csv
+
+# Assigning the instances
+trace = contact_tracing()
 
 # Assign the objects of Tkinter
 ct = tkinter.Tk()
@@ -9,7 +14,6 @@ ct.title("Contact Tracing")
 ct.geometry("600x400")
 
 # Ask for necessary entry like name, age, email, contact number, and the vaccination status
-
 name = Label(ct, text = "Name: ")
 name.place(x = 50, y = 50)
 e1 = Entry(ct, width = 50)
@@ -44,8 +48,14 @@ vac3.place(x = 60, y = 300)
 vac4 = Checkbutton(ct, text = "Not yet")
 vac4.place(x = 60, y = 325)
 
+def sub():
+    with open("ct_file.csv", "a") as myFile:
+        data = ([e1.get(),  e2.get(), e3.get(), e4.get()])
+        write_this = csv.writer(myFile)
+        write_this.writerow(data)
+
 # Create the submit button
-submitting = Button(ct, text = "Submit")
+submitting = Button(ct, text = "Submit", command = sub)
 submitting.place(x = 280, y = 235)
 
 # Create the add button
