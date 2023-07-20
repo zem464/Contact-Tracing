@@ -50,11 +50,18 @@ class contact_tracingGUI(ct.Tk):
         submitting = Button(self, text = "Submit", command = self.sub)
         submitting.place(x = 280, y = 235)
 
+    # Create function for the submit button
     def sub(self):
         with open("ct_file.csv", "a") as myFile:
             data = ([self.e1.get(),  self.e2.get(), self.e3.get(), self.e4.get()])
             write_this = csv.writer(myFile)
             write_this.writerow(data)
+
+            # Create the function to delete the inputs after being submitted
+            self.e1.delete(0, 'end')
+            self.e2.delete(0, 'end')
+            self.e3.delete(0, 'end')
+            self.e4.delete(0, 'end')
 
     # Create the add button
 
