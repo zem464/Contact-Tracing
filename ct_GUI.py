@@ -1,6 +1,7 @@
 # Import Tkinter
 import tkinter as ct
 from tkinter import *
+from tkinter import messagebox
 import csv
 
 # Organize the functions in the gui using a class
@@ -11,6 +12,7 @@ class contact_tracingGUI(ct.Tk):
         self.title("Contact Tracing")
         self.geometry("600x400")
 
+    def info(self):
         # Ask for necessary entry like name, age, email, contact number, and the vaccination status
         name = Label(self, text = "Name: ")
         name.place(x = 50, y = 50)
@@ -35,15 +37,17 @@ class contact_tracingGUI(ct.Tk):
         health = Label(self, text = "About health:")
         health.place(x = 50, y = 200)
 
+        rad = IntVar()
+
         vac = ct.Label(self, text = "Have you been vaccinated?")
         vac.place(x = 50, y = 225)
-        self.vac1 = Checkbutton(self, text = "Yes, first dose")
+        self.vac1 = Radiobutton(self, text = "Yes, first dose", Variable = rad, value = 1)
         self.vac1.place(x = 60, y = 250)
-        self.vac2 = Checkbutton(self, text = "Yes, second dose")
+        self.vac2 = Radiobutton(self, text = "Yes, second dose", Variable = rad, value = 2)
         self.vac2.place(x = 60, y = 275)
-        self.vac3 = Checkbutton(self, text = "Yes, booster")
+        self.vac3 = Radiobutton(self, text = "Yes, booster", Variable = rad, value = 3)
         self.vac3.place(x = 60, y = 300)
-        self.vac4 = Checkbutton(self, text = "Not yet")
+        self.vac4 = Radiobutton(self, text = "Not yet", Variable = rad, value = 4)
         self.vac4.place(x = 60, y = 325)
 
         # Create the submit button
@@ -62,7 +66,5 @@ class contact_tracingGUI(ct.Tk):
             self.e2.delete(0, 'end')
             self.e3.delete(0, 'end')
             self.e4.delete(0, 'end')
-
-    # Create the add button
 
     # Create the search button
