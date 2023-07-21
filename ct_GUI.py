@@ -10,10 +10,14 @@ class contact_tracingGUI(ct.Tk):
         self.title("Contact Tracing")
         self.geometry("600x400")
 
+        # Creating the search bar
+        self.bar = Entry(self, width = 80)
+        self.bar.place(x = 50, y = 50)
+
         # Ask for necessary entry like name, age, email, contact number, and the vaccination status
         name = Label(self, text = "Name: ")
         name.place(x = 50, y = 50)
-        self.e1 = ct.Entry(self, width = 50)
+        self.e1 = Entry(self, width = 50)
         self.e1.place(x = 50, y = 80)
 
         age = Label(self, text = "Age: ")
@@ -36,7 +40,7 @@ class contact_tracingGUI(ct.Tk):
 
         rad = IntVar()
 
-        vac = ct.Label(self, text = "Have you been vaccinated?")
+        vac = Label(self, text = "Have you been vaccinated?")
         vac.place(x = 50, y = 225)
         self.vac1 = Radiobutton(self, text = "Yes, first dose", Variable = rad, value = "1")
         self.vac1.place(x = 60, y = 250)
@@ -63,13 +67,3 @@ class contact_tracingGUI(ct.Tk):
         self.e2.delete(0, 'end')
         self.e3.delete(0, 'end')
         self.e4.delete(0, 'end')
-
-    # Create the search button
-    def search(self):
-            entry = []
-            with open("ct_file.csv", "r") as myFile2:
-                read_this = csv.reader(myFile2)
-                for row in read_this:
-                    if row[0] == self.e1:
-                        entry.append(row)
-            return entry
