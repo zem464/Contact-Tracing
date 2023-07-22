@@ -41,15 +41,17 @@ class contact_tracingGUI(ct.Tk):
         health = Label(self, text = "About health:")
         health.place(x = 50, y = 220)
 
+        self.rad = StringVar()
+
         vac = Label(self, text = "Have you been vaccinated?")
         vac.place(x = 50, y = 250)
-        self.vac1 = ct.Radiobutton(self, text = "Yes, first dose", value = "1")
+        self.vac1 = ct.Radiobutton(self, text = "Yes, first dose", value = "Vaccinated once", variable = self.rad, command = self.sub, indicatoron = 0)
         self.vac1.place(x = 60, y = 280)
-        self.vac2 = ct.Radiobutton(self, text = "Yes, second dose", value = "2")
+        self.vac2 = ct.Radiobutton(self, text = "Yes, second dose", value = "Fully vaccinated", variable= self.rad, command = self.sub, indicatoron = 0)
         self.vac2.place(x = 60, y = 300)
-        self.vac3 = ct.Radiobutton(self, text = "Yes, booster", value = "3")
+        self.vac3 = ct.Radiobutton(self, text = "Yes, booster", value = "Fully vaccinated", variable= self.rad, command = self.sub, indicatoron = 0)
         self.vac3.place(x = 60, y = 320)
-        self.vac4 = ct.Radiobutton(self, text = "Not yet", value = "4")
+        self.vac4 = ct.Radiobutton(self, text = "Not yet", value = "Not vaccinated", variable= self.rad, command = self.sub, indicatoron = 0)
         self.vac4.place(x = 60, y = 340)
 
         # Create the submit button
@@ -58,8 +60,8 @@ class contact_tracingGUI(ct.Tk):
 
     # Create function for the submit button
     def sub(self):
+        data = ([self.e1.get(),  self.e2.get(), self.e3.get(), self.e4.get(), self.rad.get()])
         with open("ct_file.csv", "a") as myFile:
-            data = ([self.e1.get(),  self.e2.get(), self.e3.get(), self.e4.get()])
             write_this = csv.writer(myFile)
             write_this.writerow(data)
 
