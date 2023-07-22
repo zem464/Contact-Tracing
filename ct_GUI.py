@@ -126,17 +126,17 @@ class contact_tracingGUI(ct.Tk):
                     age_info = ct.Label(info, text = "Age: " + str(entry[x][1]))
                     age_info.place(x = 50, y = 70)
                     
-                    email_info = ct.Label(info, text = "Name: " + str(entry[x][2]))
+                    email_info = ct.Label(info, text = "Email: " + str(entry[x][2]))
                     email_info.place(x = 50, y = 95)
                     
-                    number_info = ct.Label(info, text = "Age: " + str(entry[x][3]))
+                    number_info = ct.Label(info, text = "Contact Number: " + str(entry[x][3]))
                     number_info.place(x = 50, y = 120)
 
                     vac_info = ct.Label(info, text = "Vaccination Status: " + str(entry[x][4]))
                     vac_info.place(x = 50, y = 145)
 
                     exp_info = ct.Label(info, text = "Exposure: " + str(entry[x][5]))
-                    exp_info.place(x = 50, y = 160)
+                    exp_info.place(x = 50, y = 170)
 
         else:
             messagebox.showerror("Sorry", "What you're looking for is not in the system")
