@@ -1,7 +1,6 @@
 # Use this file to close the program
 
 # Import the gui
-import tkinter as ct
 from ct_GUI import contact_tracingGUI
 
 # Create root window and main module

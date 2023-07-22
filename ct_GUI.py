@@ -75,18 +75,18 @@ class contact_tracingGUI(ct.Tk):
         self.e2.delete(0, 'end')
         self.e3.delete(0, 'end')
         self.e4.delete(0, 'end')
+        self.rad.set("")
 
     # Create search button
     def search(self):
         entry = []
-        name = self.e1.get()
         with open("ct_file.csv", "r") as myFile2:
             read_this = csv.reader(myFile2)
             for row in read_this:
-                if row[0] == name:
+                if row[0] == self.e1:
                     entry.append(row)
     
-        if name == entry:
+        if entry:
             messagebox.showinfo("Info", entry)
         else:
             messagebox.showerror("Sorry", "What you're searching is not in the system")
