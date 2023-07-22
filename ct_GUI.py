@@ -59,6 +59,15 @@ class contact_tracingGUI(ct.Tk):
         self.vac4 = ct.Radiobutton(self, text = "Not yet", value = "Not vaccinated", variable= self.rad, indicatoron = 0)
         self.vac4.place(x = 370, y = 260)
 
+        self.exp = StringVar()
+
+        exp = Label(self, text = "In the last 14 days, were you exposed to someone that tested positive in COVID-19?")
+        exp.place(x = 50, y = 300)
+        self.exp1 = ct.Radiobutton(self, text = "Yes", value = "Exposed", variable = self.exp, indicatoron = 0)
+        self.exp1.place(x = 50, y = 330)
+        self.exp2 = ct.Radiobutton(self, text = "No", value = "Not Exposed", variable = self.exp, indicatoron = 0)
+        self.exp2.place(x = 100, y = 330)
+
         # Create the submit button
         submitting = Button(self, text = "Submit", command = self.sub)
         submitting.place(x = 285, y = 350)
@@ -79,16 +88,9 @@ class contact_tracingGUI(ct.Tk):
 
     # Create search button
     def search(self):
+        name = self.e1.get()
         entry = []
         with open("ct_file.csv", "r") as myFile2:
             read_this = csv.reader(myFile2)
             for row in read_this:
-                if row[0] == self.e1:
                     entry.append(row)
-    
-        if entry:
-            messagebox.showinfo("Info", entry)
-        else:
-            messagebox.showerror("Sorry", "What you're searching is not in the system")
-
-        return entry
