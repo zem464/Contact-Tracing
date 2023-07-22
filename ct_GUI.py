@@ -44,20 +44,20 @@ class contact_tracingGUI(ct.Tk):
         self.e4.place(x = 400, y = 180)
         
         health = Label(self, text = "About health:")
-        health.place(x = 50, y = 220)
+        health.place(x = 50, y = 210)
 
         self.rad = StringVar()
 
         vac = Label(self, text = "Have you been vaccinated?")
-        vac.place(x = 50, y = 250)
+        vac.place(x = 50, y = 230)
         self.vac1 = ct.Radiobutton(self, text = "Yes, first dose", value = "Partially vaccinated", variable = self.rad, indicatoron = 0)
-        self.vac1.place(x = 60, y = 280)
+        self.vac1.place(x = 50, y = 260)
         self.vac2 = ct.Radiobutton(self, text = "Yes, second dose", value = "Fully vaccinated", variable= self.rad, indicatoron = 0)
-        self.vac2.place(x = 60, y = 300)
+        self.vac2.place(x = 150, y = 260)
         self.vac3 = ct.Radiobutton(self, text = "Yes, booster", value = "Vaccinated", variable= self.rad, indicatoron = 0)
-        self.vac3.place(x = 60, y = 320)
+        self.vac3.place(x = 270, y = 260)
         self.vac4 = ct.Radiobutton(self, text = "Not yet", value = "Not vaccinated", variable= self.rad, indicatoron = 0)
-        self.vac4.place(x = 60, y = 340)
+        self.vac4.place(x = 370, y = 260)
 
         # Create the submit button
         submitting = Button(self, text = "Submit", command = self.sub)
@@ -66,7 +66,7 @@ class contact_tracingGUI(ct.Tk):
     # Create function for the submit button
     def sub(self):
         data = ([self.e1.get(),  self.e2.get(), self.e3.get(), self.e4.get(), self.rad.get()])
-        with open("ct_file.csv", "a") as myFile:
+        with open("ct_file.csv", "a", newline = "") as myFile:
             write_this = csv.writer(myFile)
             write_this.writerow(data)
 
@@ -79,13 +79,16 @@ class contact_tracingGUI(ct.Tk):
     # Create search button
     def search(self):
         entry = []
+        name = self.e1.get()
         with open("ct_file.csv", "r") as myFile2:
             read_this = csv.reader(myFile2)
             for row in read_this:
-                if row[0] == self.e1:
-                    return entry
-                
-        if self.bar == entry:
+                if row[0] == name:
+                    entry.append(row)
+    
+        if name == entry:
             messagebox.showinfo("Info", entry)
         else:
             messagebox.showerror("Sorry", "What you're searching is not in the system")
+
+        return entry
