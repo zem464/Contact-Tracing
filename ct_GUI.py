@@ -65,9 +65,9 @@ class contact_tracingGUI(ct.Tk):
         self.vac2 = ct.Radiobutton(self, text = "Yes, second dose", value = "Fully vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9")
         self.vac2.place(x = 150, y = 325)
         self.vac3 = ct.Radiobutton(self, text = "Yes, booster", value = "Vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9")
-        self.vac3.place(x = 270, y = 325)
+        self.vac3.place(x = 275, y = 325)
         self.vac4 = ct.Radiobutton(self, text = "Not yet", value = "Not vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9")
-        self.vac4.place(x = 370, y = 325)
+        self.vac4.place(x = 375, y = 325)
 
         self.exp = StringVar()
 
@@ -76,7 +76,9 @@ class contact_tracingGUI(ct.Tk):
         self.exp1 = ct.Radiobutton(self, text = "Yes", value = "Exposed", variable = self.exp, indicatoron = 0, bg = "#EEEEC9")
         self.exp1.place(x = 50, y = 400)
         self.exp2 = ct.Radiobutton(self, text = "No", value = "Not Exposed", variable = self.exp, indicatoron = 0, bg = "#EEEEC9")
-        self.exp2.place(x = 100, y = 400)
+        self.exp2.place(x = 80, y = 400)
+        self.exp3 = ct.Radiobutton(self, text = "Not Sure", value = "Not Certain", variable = self.exp, indicatoron = 0, bg = "#EEEEC9")
+        self.exp3.place(x = 110, y = 400)
 
         # Create the submit button
         submitting = Button(self, text = "Submit", command = self.sub)
@@ -95,6 +97,7 @@ class contact_tracingGUI(ct.Tk):
         self.e3.delete(0, 'end')
         self.e4.delete(0, 'end')
         self.rad.set("")
+        self.exp.set("")
 
     # Create search button
     def search(self):
