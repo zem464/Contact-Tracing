@@ -1,6 +1,7 @@
 # Import Tkinter
 import tkinter as ct
 from tkinter import *
+from tkinter import messagebox
 import csv
 
 # Organize the functions in the gui using a class
@@ -16,6 +17,10 @@ class contact_tracingGUI(ct.Tk):
         here.place(x = 50, y = 20)
         self.bar = ct.Entry(self, width = 65)
         self.bar.place(x = 50, y = 40)
+
+        # Create the search button
+        search = ct.Button(self, text = "Search", command = self.search)
+        search.place(x = 470, y = 35)
 
         # Ask for necessary entry like name, age, email, contact number, and the vaccination status
         name = Label(self, text = "Name: ")
@@ -45,13 +50,13 @@ class contact_tracingGUI(ct.Tk):
 
         vac = Label(self, text = "Have you been vaccinated?")
         vac.place(x = 50, y = 250)
-        self.vac1 = ct.Radiobutton(self, text = "Yes, first dose", value = "Vaccinated once", variable = self.rad, command = self.sub, indicatoron = 0)
+        self.vac1 = ct.Radiobutton(self, text = "Yes, first dose", value = "Partially vaccinated", variable = self.rad, indicatoron = 0)
         self.vac1.place(x = 60, y = 280)
-        self.vac2 = ct.Radiobutton(self, text = "Yes, second dose", value = "Fully vaccinated", variable= self.rad, command = self.sub, indicatoron = 0)
+        self.vac2 = ct.Radiobutton(self, text = "Yes, second dose", value = "Fully vaccinated", variable= self.rad, indicatoron = 0)
         self.vac2.place(x = 60, y = 300)
-        self.vac3 = ct.Radiobutton(self, text = "Yes, booster", value = "Fully vaccinated", variable= self.rad, command = self.sub, indicatoron = 0)
+        self.vac3 = ct.Radiobutton(self, text = "Yes, booster", value = "Vaccinated", variable= self.rad, indicatoron = 0)
         self.vac3.place(x = 60, y = 320)
-        self.vac4 = ct.Radiobutton(self, text = "Not yet", value = "Not vaccinated", variable= self.rad, command = self.sub, indicatoron = 0)
+        self.vac4 = ct.Radiobutton(self, text = "Not yet", value = "Not vaccinated", variable= self.rad, indicatoron = 0)
         self.vac4.place(x = 60, y = 340)
 
         # Create the submit button
@@ -71,6 +76,16 @@ class contact_tracingGUI(ct.Tk):
         self.e3.delete(0, 'end')
         self.e4.delete(0, 'end')
 
-# Create add button
-
-# Create search button
+    # Create search button
+    def search(self):
+        entry = []
+        with open("ct_file.csv", "r") as myFile2:
+            read_this = csv.reader(myFile2)
+            for row in read_this:
+                if row[0] == self.e1:
+                    return entry
+                
+        if self.bar == entry:
+            messagebox.showinfo("Info", entry)
+        else:
+            messagebox.showerror("Sorry", "What you're searching is not in the system")
