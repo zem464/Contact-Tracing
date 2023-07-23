@@ -13,6 +13,11 @@ class contact_tracingGUI(ct.Tk):
         self.geometry("900x700")
         self.configure(bg = "#8B8B73")
 
+        # Title
+        title = ct.Label(self, text = "CONTACT TRACING", bg = "#8B8B73")
+        title.place(x = 200, y = 20)
+        title.configure(font = ("Century Schoolbook", 35, "bold"),fg = "#EEEEC9")
+
         # Fonts
         font1 = ("Century Schoolbook", 14, "bold")
         font2 = ("Times New Roman", 13, "normal")
@@ -26,7 +31,7 @@ class contact_tracingGUI(ct.Tk):
         info_frame.place(x = 20, y = 175)
 
         # Creating the search bar
-        here = Label(self, text = "Search here...", bg = "#EEEEC9")
+        here = Label(self, text = "Search here...", bg = "#EEEEC9", fg = "#48483D")
         here.place(x = 50, y = 110)
         here.configure(font = ("Century Schoolbook", 11, "bold"))
         self.bar = ct.Entry(self, width = 90)
@@ -34,82 +39,82 @@ class contact_tracingGUI(ct.Tk):
         self.bar.configure(font = font3)
 
         # Create the search button
-        search = ct.Button(self, text = "Search", command = self.search)
+        search = ct.Button(self, text = "Search", command = self.search, fg = "#48483D")
         search.place(x = 800, y = 132)
         search.configure(font = ("Times New Roman", 10, "normal"))
 
         # Ask for necessary entry like name, age, email, contact number, and the vaccination status
-        intro = Label(self, text = "INFORMATION", bg = "#EEEEC9")
+        intro = Label(self, text = "INFORMATION", bg = "#EEEEC9", fg = "#48483D")
         intro.place(x = 50, y = 200)
         intro.configure(font = font1)
 
-        name = Label(self, text = "Name: ", bg = "#EEEEC9")
+        name = Label(self, text = "Name: ", bg = "#EEEEC9", fg = "#48483D")
         name.place(x = 50, y = 250)
         name.configure(font = font2)
         self.e1 = ct.Entry(self, width = 65)
         self.e1.place(x = 50, y = 280)
         self.e1.configure(font = font3)
         
-        age = Label(self, text = "Age: ", bg = "#EEEEC9")
+        age = Label(self, text = "Age: ", bg = "#EEEEC9", fg = "#48483D")
         age.place(x = 610, y = 250)
         age.configure(font = font2)
         self.e2 = ct.Entry(self, width = 25)
         self.e2.place(x = 610, y = 280)
         self.e2.configure(font = font3)
         
-        email = Label(self, text = "Email: ", bg = "#EEEEC9")
+        email = Label(self, text = "Email: ", bg = "#EEEEC9", fg = "#48483D")
         email.place(x = 50, y = 320)
         email.configure(font = font2)
         self.e3 = ct.Entry(self, width = 65)
         self.e3.place(x = 50, y = 350)
         self.e3.configure(font = font3)
         
-        number = Label(self, text = "Contact number: ", bg = "#EEEEC9")
+        number = Label(self, text = "Contact number: ", bg = "#EEEEC9", fg = "#48483D")
         number.place(x = 610, y = 320)
         number.configure(font = font2)
         self.e4 = ct.Entry(self, width = 25)
         self.e4.place(x = 610, y = 350)
         self.e4.configure(font = font3)
         
-        health = Label(self, text = "ABOUT HEALTH", bg = "#EEEEC9")
+        health = Label(self, text = "ABOUT HEALTH", bg = "#EEEEC9", fg = "#48483D")
         health.place(x = 50, y = 400)
         health.configure(font = font1)
 
         self.rad = StringVar()
 
-        vac = Label(self, text = "Have you been vaccinated?", bg = "#EEEEC9")
+        vac = Label(self, text = "Have you been vaccinated?", bg = "#EEEEC9", fg = "#48483D")
         vac.place(x = 50, y = 450)
         vac.configure(font = font2)
-        self.vac1 = ct.Radiobutton(self, text = "Yes, first dose", value = "Partially vaccinated", variable = self.rad, indicatoron = 0, bg = "#EEEEC9")
+        self.vac1 = ct.Radiobutton(self, text = "Yes, first dose", value = "Partially vaccinated", variable = self.rad, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D")
         self.vac1.place(x = 70, y = 480)
         self.vac1.configure(font = font3)
-        self.vac2 = ct.Radiobutton(self, text = "Yes, second dose", value = "Fully vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9")
+        self.vac2 = ct.Radiobutton(self, text = "Yes, second dose", value = "Fully vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D")
         self.vac2.place(x = 175, y = 480)
         self.vac2.configure(font = font3)
-        self.vac3 = ct.Radiobutton(self, text = "Yes, booster", value = "Vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9")
+        self.vac3 = ct.Radiobutton(self, text = "Yes, booster", value = "Vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D")
         self.vac3.place(x = 300, y = 480)
         self.vac3.configure(font = font3)
-        self.vac4 = ct.Radiobutton(self, text = "Not yet", value = "Not vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9")
+        self.vac4 = ct.Radiobutton(self, text = "Not yet", value = "Not vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D")
         self.vac4.place(x = 400, y = 480)
         self.vac4.configure(font = font3)
 
         self.exp = StringVar()
 
-        exp = Label(self, text = "In the last 14 days, were you exposed to someone that tested positive in COVID-19?", bg = "#EEEEC9")
+        exp = Label(self, text = "In the last 14 days, were you exposed to someone that tested positive in COVID-19?", bg = "#EEEEC9", fg = "#48483D")
         exp.place(x = 50, y = 530)
         exp.configure(font = font2)
-        self.exp1 = ct.Radiobutton(self, text = "Yes", value = "Exposed", variable = self.exp, indicatoron = 0, bg = "#EEEEC9")
+        self.exp1 = ct.Radiobutton(self, text = "Yes", value = "Exposed", variable = self.exp, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D")
         self.exp1.place(x = 70, y = 560)
         self.exp1.configure(font = font3)
-        self.exp2 = ct.Radiobutton(self, text = "No", value = "Not Exposed", variable = self.exp, indicatoron = 0, bg = "#EEEEC9")
+        self.exp2 = ct.Radiobutton(self, text = "No", value = "Not Exposed", variable = self.exp, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D")
         self.exp2.place(x = 105, y = 560)
         self.exp2.configure(font = font3)
-        self.exp3 = ct.Radiobutton(self, text = "Not Sure", value = "Not Certain", variable = self.exp, indicatoron = 0, bg = "#EEEEC9")
+        self.exp3 = ct.Radiobutton(self, text = "Not Sure", value = "Not Certain", variable = self.exp, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D")
         self.exp3.place(x = 140, y = 560)
         self.exp3.configure(font = font3)
 
         # Create the submit button
-        submitting = Button(self, text = "Submit", command = self.sub)
+        submitting = Button(self, text = "Submit", command = self.sub, fg = "#48483D")
         submitting.place(x = 430, y = 650)
         submitting.configure(font = font4)
 
