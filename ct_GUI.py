@@ -115,28 +115,32 @@ class contact_tracingGUI(ct.Tk):
                 if name == entry[x][0]:
                     info = ct.Toplevel(self)
                     info.title("Information")
-                    info.geometry("300x200")
+                    info.geometry("300x225")
+                    info.configure(bg = "#8B8B75")
+
+                    frame_about = ct.Frame(info, width = 250, height = 200, bg = "#CDCDAD")
+                    frame_about.place(x = 25, y = 10)
 
                     title = ct.Label(info, text = "ABOUT")
-                    title.place(x = 125, y = 15)
+                    title.place(x = 125, y = 20)
                     
-                    name_info = ct.Label(info, text = "Name: " + str(entry[x][0]))
-                    name_info.place(x = 50, y = 45)
+                    name_info = ct.Label(info, text = "Name: " + str(entry[x][0]), bg = "#CDCDAD")
+                    name_info.place(x = 45, y = 55)
                     
-                    age_info = ct.Label(info, text = "Age: " + str(entry[x][1]))
-                    age_info.place(x = 50, y = 70)
+                    age_info = ct.Label(info, text = "Age: " + str(entry[x][1]), bg = "#CDCDAD")
+                    age_info.place(x = 45, y = 80)
                     
-                    email_info = ct.Label(info, text = "Email: " + str(entry[x][2]))
-                    email_info.place(x = 50, y = 95)
+                    email_info = ct.Label(info, text = "Email: " + str(entry[x][2]), bg = "#CDCDAD")
+                    email_info.place(x = 45, y = 105)
                     
-                    number_info = ct.Label(info, text = "Contact Number: " + str(entry[x][3]))
-                    number_info.place(x = 50, y = 120)
+                    number_info = ct.Label(info, text = "Contact Number: " + str(entry[x][3]), bg = "#CDCDAD")
+                    number_info.place(x = 45, y = 130)
 
-                    vac_info = ct.Label(info, text = "Vaccination Status: " + str(entry[x][4]))
-                    vac_info.place(x = 50, y = 145)
+                    vac_info = ct.Label(info, text = "Vaccination Status: " + str(entry[x][4]), bg = "#CDCDAD")
+                    vac_info.place(x = 45, y = 155)
 
-                    exp_info = ct.Label(info, text = "Exposure: " + str(entry[x][5]))
-                    exp_info.place(x = 50, y = 170)
+                    exp_info = ct.Label(info, text = "Exposure: " + str(entry[x][5]), bg = "#CDCDAD")
+                    exp_info.place(x = 45, y = 180)
 
         else:
             messagebox.showerror("Sorry", "What you're looking for is not in the system")
