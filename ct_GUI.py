@@ -16,11 +16,11 @@ class contact_tracingGUI(ct.Tk):
         # Title
         title = ct.Label(self, text = "CONTACT TRACING", bg = "#8B8B73")
         title.place(x = 200, y = 20)
-        title.configure(font = ("Century Schoolbook", 35, "bold"),fg = "#EEEEC9")
+        title.configure(font = ("Century Schoolbook", 35, "bold"), fg = "#EEEEC9")
 
         # Fonts
         font1 = ("Century Schoolbook", 14, "bold")
-        font2 = ("Times New Roman", 13, "normal")
+        font2 = ("Times New Roman", 13, "bold")
         font3 = ("Times New Roman", 12, "normal")
         font4 = ("Times New Roman", 11, "normal")
 
@@ -143,48 +143,87 @@ class contact_tracingGUI(ct.Tk):
                     entry.append(row)
         
         look = [x[0] for x in entry]
-    
+
+        # If search entry is in the list of inputs
         if name in look:
             for x in range(0, len(entry)):
                 if name == entry[x][0]:
+                    # Open a toplevel window
                     info = ct.Toplevel(self)
                     info.title("Information")
                     info.geometry("300x225")
                     info.configure(bg = "#8B8B75")
 
-                    font4 = ("MS Sans Serif", 10, "bold")
-                    font5 = ("MS Sans Serif", 9, "normal")
+                    # Toplevel window: fonts
+                    font5 = ("Century Schoolbook", 12, "bold")
+                    font6 = ("MS Sans Serif", 10, "bold")
+                    font7 = ("MS Sans Serif", 10, "normal")
 
-                    frame_about = ct.Frame(info, width = 250, height = 200, bg = "#CDCDAD")
-                    frame_about.place(x = 25, y = 10)
+                    # Toplevel window: frame and title
+                    frame_about = ct.Frame(info, width = 265, height = 155, bg = "#CDCDAD")
+                    frame_about.place(x = 20, y = 55)
 
-                    title = ct.Label(info, text = " ABOUT ")
-                    title.place(x = 120, y = 20)
-                    title.configure(font = font4)
+                    title = ct.Label(info, text = " ABOUT ", bg = "#8B8B75", fg = "#EEEEC9")
+                    title.place(x = 115, y = 20)
+                    title.configure(font = font5)
                     
-                    name_info = ct.Label(info, text = "Name: " + str(entry[x][0]), bg = "#CDCDAD")
-                    name_info.place(x = 45, y = 55)
-                    name_info.configure(font = font5)
-                    
-                    age_info = ct.Label(info, text = "Age: " + str(entry[x][1]), bg = "#CDCDAD")
-                    age_info.place(x = 45, y = 80)
-                    age_info.configure(font = font5)
-                    
-                    email_info = ct.Label(info, text = "Email: " + str(entry[x][2]), bg = "#CDCDAD")
-                    email_info.place(x = 45, y = 105)
-                    email_info.configure(font = font5)
-                    
-                    number_info = ct.Label(info, text = "Contact Number: " + str(entry[x][3]), bg = "#CDCDAD")
-                    number_info.place(x = 45, y = 130)
-                    number_info.configure(font = font5)
+                    # Strings instance
+                    col1 = str(entry[x][0])
+                    col2 = str(entry[x][1])
+                    col3 = str(entry[x][2])
+                    col4 = str(entry[x][3])
+                    col5 = str(entry[x][4])
+                    col6 = str(entry[x][5])
 
-                    vac_info = ct.Label(info, text = "Vaccination Status: " + str(entry[x][4]), bg = "#CDCDAD")
-                    vac_info.place(x = 45, y = 155)
-                    vac_info.configure(font = font5)
+                    # Toplevel window: informations
+                    name_info = ct.Label(info, text = "Name: ", bg = "#CDCDAD")
+                    name_info.place(x = 25, y = 60)
+                    name_info.configure(font = font6)
 
-                    exp_info = ct.Label(info, text = "Exposure: " + str(entry[x][5]), bg = "#CDCDAD")
-                    exp_info.place(x = 45, y = 180)
-                    exp_info.configure(font = font5)
+                    name_col1 = ct.Label(info, text = col1, bg = "#CDCDAD")
+                    name_col1.place(x = 90, y = 60)
+                    name_col1.configure(font = font7)
+                    
+                    age_info = ct.Label(info, text = "Age: ", bg = "#CDCDAD")
+                    age_info.place(x = 25, y = 85)
+                    age_info.configure(font = font6)
 
+                    age_col2 = ct.Label(info, text = col2, bg = "#CDCDAD")
+                    age_col2.place(x = 90, y = 85)
+                    age_col2.configure(font = font7)
+                    
+                    email_info = ct.Label(info, text = "Email: ", bg = "#CDCDAD")
+                    email_info.place(x = 25, y = 110)
+                    email_info.configure(font = font6)
+
+                    email_col3 = ct.Label(info, text = col3, bg = "#CDCDAD")
+                    email_col3.place(x = 90, y = 110)
+                    email_col3.configure(font = font7)
+                    
+                    number_info = ct.Label(info, text = "Contact No.: ", bg = "#CDCDAD")
+                    number_info.place(x = 25, y = 135)
+                    number_info.configure(font = font6)
+
+                    number_col4 = ct.Label(info, text = col4, bg = "#CDCDAD")
+                    number_col4.place(x = 120, y = 135)
+                    number_col4.configure(font = font7)
+
+                    vac_info = ct.Label(info, text = "Vaccination Status: ", bg = "#CDCDAD")
+                    vac_info.place(x = 25, y = 160)
+                    vac_info.configure(font = font6)
+
+                    vac_col5 = ct.Label(info, text = col5, bg = "#CDCDAD")
+                    vac_col5.place(x = 160, y = 160)
+                    vac_col5.configure(font = font7)
+
+                    exp_info = ct.Label(info, text = "Exposure: ", bg = "#CDCDAD")
+                    exp_info.place(x = 25, y = 185)
+                    exp_info.configure(font = font6)
+
+                    exp_col6 = ct.Label(info, text = col6, bg = "#CDCDAD")
+                    exp_col6.place(x = 110, y = 185)
+                    exp_col6.configure(font = font7)
+
+        # If entry is not in the list of inputs
         else:
             messagebox.showerror("Not Found", "What you're looking for is not in the system")
