@@ -108,7 +108,7 @@ class contact_tracingGUI(ct.Tk):
 
     # Create function for the submit button
     def sub(self):
-        data = ([self.e1.get(),  self.e2.get(), self.e3.get(), self.e4.get(), self.rad.get(), self.exp.get()])
+        data = ([self.e1.get().title(),  self.e2.get(), self.e3.get(), self.e4.get(), self.rad.get(), self.exp.get()])
         with open("ct_file.csv", "a", newline = "") as myFile:
             write_this = csv.writer(myFile)
             write_this.writerow(data)
@@ -123,7 +123,7 @@ class contact_tracingGUI(ct.Tk):
 
     # Create search button
     def search(self):
-        name = self.bar.get()
+        name = self.bar.get().title()
         entry = []
         with open("ct_file.csv", "r") as myFile2:
             read_this = csv.reader(myFile2)
