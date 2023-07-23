@@ -11,7 +11,7 @@ class contact_tracingGUI(ct.Tk):
         # Adding the title and size of the GUI
         self.title("Contact Tracing")
         self.geometry("600x500")
-        self.configure(bg = "#DADAA5")
+        self.configure(bg = "#8B8B73")
 
         font1 = ("Century Schoolbook", 10, "bold")
         font2 = ("Times New Roman", 10, "normal")
@@ -33,6 +33,7 @@ class contact_tracingGUI(ct.Tk):
         # Create the search button
         search = ct.Button(self, text = "Search", command = self.search)
         search.place(x = 470, y = 55)
+        search.configure(font = font3)
 
         # Ask for necessary entry like name, age, email, contact number, and the vaccination status
         intro = Label(self, text = "INFORMATION", bg = "#EEEEC9")
@@ -73,16 +74,16 @@ class contact_tracingGUI(ct.Tk):
         vac.place(x = 50, y = 295)
         vac.configure(font = font2)
         self.vac1 = ct.Radiobutton(self, text = "Yes, first dose", value = "Partially vaccinated", variable = self.rad, indicatoron = 0, bg = "#EEEEC9")
-        self.vac1.place(x = 50, y = 325)
+        self.vac1.place(x = 60, y = 325)
         self.vac1.configure(font = font3)
         self.vac2 = ct.Radiobutton(self, text = "Yes, second dose", value = "Fully vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9")
-        self.vac2.place(x = 150, y = 325)
+        self.vac2.place(x = 145, y = 325)
         self.vac2.configure(font = font3)
         self.vac3 = ct.Radiobutton(self, text = "Yes, booster", value = "Vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9")
-        self.vac3.place(x = 275, y = 325)
+        self.vac3.place(x = 245, y = 325)
         self.vac3.configure(font = font3)
         self.vac4 = ct.Radiobutton(self, text = "Not yet", value = "Not vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9")
-        self.vac4.place(x = 375, y = 325)
+        self.vac4.place(x = 325, y = 325)
         self.vac4.configure(font = font3)
 
         self.exp = StringVar()
@@ -91,13 +92,13 @@ class contact_tracingGUI(ct.Tk):
         exp.place(x = 50, y = 370)
         exp.configure(font = font2)
         self.exp1 = ct.Radiobutton(self, text = "Yes", value = "Exposed", variable = self.exp, indicatoron = 0, bg = "#EEEEC9")
-        self.exp1.place(x = 50, y = 400)
+        self.exp1.place(x = 60, y = 400)
         self.exp1.configure(font = font3)
         self.exp2 = ct.Radiobutton(self, text = "No", value = "Not Exposed", variable = self.exp, indicatoron = 0, bg = "#EEEEC9")
-        self.exp2.place(x = 80, y = 400)
+        self.exp2.place(x = 95, y = 400)
         self.exp2.configure(font = font3)
         self.exp3 = ct.Radiobutton(self, text = "Not Sure", value = "Not Certain", variable = self.exp, indicatoron = 0, bg = "#EEEEC9")
-        self.exp3.place(x = 110, y = 400)
+        self.exp3.place(x = 130, y = 400)
         self.exp3.configure(font = font3)
 
         # Create the submit button
@@ -146,7 +147,7 @@ class contact_tracingGUI(ct.Tk):
                     frame_about.place(x = 25, y = 10)
 
                     title = ct.Label(info, text = " ABOUT ")
-                    title.place(x = 125, y = 20)
+                    title.place(x = 120, y = 20)
                     title.configure(font = font4)
                     
                     name_info = ct.Label(info, text = "Name: " + str(entry[x][0]), bg = "#CDCDAD")
