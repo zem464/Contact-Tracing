@@ -57,6 +57,6 @@ Create “your” own covid contact tracing app with GUI
 ### Contact
 Zemerelin Iris M. Membrere - _zemerelinmembrere@gmail.com_
 
-**Project Link :** https://github.com/zem464/Contact-Tracing.git
+**Output Link :** https://drive.google.com/file/d/1P07qdACV_13qyRg6yrZb-Q8lOsoX2eO8/view?usp=sharing
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
