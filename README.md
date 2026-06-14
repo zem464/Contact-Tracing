@@ -1,13 +1,10 @@
-# Contact-Tracing
-
-**Built for :** Final Project for Object Oriented Programming.
-
-  **Submitted to :** Prof. Danilo Madrigalejos 
-  
-  **A.Y :** 2022-2023
-
 ## About the Project
 **CONTACT TRACING**
+
+## About the Project
+A Python-based desktop application built with Tkinter to securely collect, store, and manage COVID-19 contact tracing information. 
+
+This project simulates a real-world health declaration system, allowing administrators to seamlessly input typical contact tracing data (such as age, contact details, vaccination status, and exposure history) and permanently save it to a local CSV database. It also features a built-in search tool to quickly retrieve and display specific user entries in a clean, secondary window.
 
 Create “your” own covid contact tracing app with GUI
 	
@@ -22,6 +19,13 @@ Create “your” own covid contact tracing app with GUI
     - Be creative, the realistic the better.
 	
     - Please don't submit downloaded program
+
+## Technical Architecture
+This application is structured using Object-Oriented Programming (OOP) principles to ensure clean, modular, and maintainable code:
+* **GUI Framework:** Built using Python's standard `tkinter` library. The main application is organized within a custom class that inherits from `Tk`.
+* **Data Management:** Utilizes Python's native `csv` module to handle appending new records and reading existing data safely.
+* **Window Management:** Leverages `Toplevel` widgets to create dynamic pop-up windows for displaying search results without cluttering the main dashboard.
+* **Event Handling:** Custom functions are bound to specific buttons, including automatic state-reset mechanisms that clear entry fields immediately after a successful submission.
 
 ## About the Program
 **STEPS**
@@ -54,9 +58,7 @@ Create “your” own covid contact tracing app with GUI
 
 2. If searching: Enter the full name of who you're looking for then press the search button.
 
-### Contact
-Zemerelin Iris M. Membrere - _zemerelinmembrere@gmail.com_
-
-**Output Link :** https://drive.google.com/file/d/1P07qdACV_13qyRg6yrZb-Q8lOsoX2eO8/view?usp=sharing
+## Usage & License
+Feel free to use, modify, or study this repository for whatever reason—whether it is for your own personal projects, learning, or reference! All I ask is that you please provide credit to this GitHub account if you choose to use this code.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
