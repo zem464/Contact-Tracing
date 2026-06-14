@@ -47,9 +47,17 @@ class contact_tracingGUI(ct.Tk):
         self.bar = ct.Entry(self.search_frame, width = 90, font = self.font3)
         self.bar.place(x = 50, y = 45)
 
-        # Create the search button
-        search_btn = ct.Button(self.search_frame, text = "Search", command = self.search, fg = "#48483D", font = ("Times New Roman", 10, "normal"))
+        # FIXED: Added angle brackets
+        self.bar.bind("<KeyRelease>", self.predictive_search)
+
+        # FIXED: Changed command to self.search_button_click
+        search_btn = ct.Button(self.search_frame, text = "Search", command = self.search_button_click, fg = "#48483D", font = ("Times New Roman", 10, "normal"))
         search_btn.place(x = 800, y = 42)
+
+        self.result_list = ct.Listbox(self, height=5, font=self.font3)
+        self.result_list.bind("<<ListboxSelect>>", self.on_result_select)
+        
+        self.current_matches = []
 
     def info(self):
         # ==========================================
@@ -105,7 +113,7 @@ class contact_tracingGUI(ct.Tk):
         self.exp3 = ct.Radiobutton(self.info_frame, text = "Not Sure", value = "Not Certain", variable = self.exp, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = self.font3)
         self.exp3.place(x = 140, y = 370)
 
-        # Create the submit button (Moved up slightly to fit in the new 500px high frame)
+        # Create the submit button
         submitting = Button(self.info_frame, text = "Submit", command = self.sub, fg = "#48483D", font = self.font4)
         submitting.place(x = 430, y = 440)
 
@@ -124,89 +132,113 @@ class contact_tracingGUI(ct.Tk):
         self.rad.set("")
         self.exp.set("")
 
-    # Create search button
-    def search(self):
-        name = self.bar.get().title()
-        entry = []
-        try:
-            with open("ct_file.csv", "r") as myFile2:
-                read_this = csv.reader(myFile2)
-                for row in read_this:
-                    if row: # Make sure row is not empty
-                        entry.append(row)
-        except FileNotFoundError:
-            messagebox.showerror("Error", "No database found. Please submit an entry first.")
+    # Create the function for the predictive search
+    def predictive_search(self, event):
+        # Runs every time a key is pressed in the search bar.
+        typed = self.bar.get().strip().lower()
+        
+        # Hide the dropdown if the search bar is empty
+        if not typed:
+            self.result_list.place_forget()
             return
-        
-        # Instance to look for the searched item
-        look = [x[0] for x in entry]
 
-        # If search entry is in the list of inputs
-        if name in look:
-            for x in range(0, len(entry)):
-                if name == entry[x][0]:
-                    # Open a toplevel window
-                    info = ct.Toplevel(self)
-                    info.title("Information")
-                    info.geometry("300x225")
-                    info.configure(bg = "#8B8B75")
-
-                    # Toplevel window: fonts
-                    font5 = ("Century Schoolbook", 12, "bold")
-                    font6 = ("MS Sans Serif", 10, "bold")
-                    font7 = ("MS Sans Serif", 10, "normal")
-
-                    # Toplevel window: frame and title
-                    frame_about = ct.Frame(info, width = 265, height = 155, bg = "#CDCDAD")
-                    frame_about.place(x = 20, y = 55)
-
-                    title = ct.Label(info, text = " ABOUT ", bg = "#8B8B75", fg = "#EEEEC9", font = font5)
-                    title.place(x = 115, y = 20)
+        self.current_matches = []
+        try:
+            with open("ct_file.csv", "r") as file:
+                reader = csv.reader(file)
+                for row in reader:
+                    if not row: continue
                     
-                    # Strings instance
-                    col1 = str(entry[x][0])
-                    col2 = str(entry[x][1])
-                    col3 = str(entry[x][2])
-                    col4 = str(entry[x][3])
-                    col5 = str(entry[x][4])
-                    col6 = str(entry[x][5])
+                    # Check if typed text is IN Name (0), Age (1), Email (2), or Contact (3)
+                    # This allows partial matches across all those columns
+                    if any(typed in str(row[i]).lower() for i in range(min(4, len(row)))):
+                        self.current_matches.append(row)
+        except FileNotFoundError:
+            pass # Ignore silently if the database doesn't exist yet
 
-                    # Toplevel window: informations
-                    name_info = ct.Label(info, text = "Name: ", bg = "#CDCDAD", font = font6)
-                    name_info.place(x = 25, y = 60)
+        # Update the Listbox GUI
+        self.result_list.delete(0, ct.END)
+        if self.current_matches:
+            
+            # Set height to the exact number of matches, but cap it at 5 so it doesn't get too long
+            display_count = min(len(self.current_matches), 5)
+            self.result_list.configure(height=display_count)
 
-                    name_col1 = ct.Label(info, text = col1, bg = "#CDCDAD", font = font7)
-                    name_col1.place(x = 90, y = 60)
-                    
-                    age_info = ct.Label(info, text = "Age: ", bg = "#CDCDAD", font = font6)
-                    age_info.place(x = 25, y = 85)
-                    age_col2 = ct.Label(info, text = col2, bg = "#CDCDAD", font = font7)
-                    age_col2.place(x = 90, y = 85)
-                    
-                    email_info = ct.Label(info, text = "Email: ", bg = "#CDCDAD", font = font6)
-                    email_info.place(x = 25, y = 110)
+            self.result_list.place(in_=self.bar, x=0, rely=1.0, relwidth=1.0)
+            self.result_list.lift() # Force the widget to draw on top of everything else
+            
+            for match in self.current_matches:
+                # Extract the data
+                name = match[0]
+                email = match[2]
+                contact = match[3]
 
-                    email_col3 = ct.Label(info, text = col3, bg = "#CDCDAD", font = font7)
-                    email_col3.place(x = 90, y = 110)
-                    
-                    number_info = ct.Label(info, text = "Contact No.: ", bg = "#CDCDAD", font = font6)
-                    number_info.place(x = 25, y = 135)
+                # Smart Truncation (Limits length so it fits in the box)
+                # If a name is longer than 25 chars, cut it and add "..."
+                if len(name) > 25: name = name[:22] + "..."
+                
+                # If an email is longer than 30 chars, cut it and add "..."
+                if len(email) > 30: email = email[:27] + "..."
 
-                    number_col4 = ct.Label(info, text = col4, bg = "#CDCDAD", font = font7)
-                    number_col4.place(x = 120, y = 135)
+                # Build the clean, limited-length display text
+                display_text = f"{name:<25}  |  Email: {email:<30}  |  No: {contact}"
+                
+                self.result_list.insert(ct.END, display_text)
+        else:
+            self.result_list.place_forget() # Hide if no matches found
 
-                    vac_info = ct.Label(info, text = "Vaccination Status: ", bg = "#CDCDAD", font = font6)
-                    vac_info.place(x = 25, y = 160)
+    def on_result_select(self, event):
+        """Triggers when a user clicks a name in the predictive dropdown."""
+        selection = self.result_list.curselection()
+        if selection:
+            index = selection[0]
+            selected_data = self.current_matches[index]
+            self.display_info_window(selected_data)
+            
+            # Reset the search bar after selection
+            self.bar.delete(0, ct.END)
+            self.result_list.place_forget()
 
-                    vac_col5 = ct.Label(info, text = col5, bg = "#CDCDAD", font = font7)
-                    vac_col5.place(x = 160, y = 160)
-
-                    exp_info = ct.Label(info, text = "Exposure: ", bg = "#CDCDAD", font = font6)
-                    exp_info.place(x = 25, y = 185)
-
-                    exp_col6 = ct.Label(info, text = col6, bg = "#CDCDAD", font = font7)
-                    exp_col6.place(x = 110, y = 185)
-        
-        # If entry is not in the list of inputs
+    def search_button_click(self):
+        """Fallback for the physical button."""
+        if self.current_matches:
+            # Show the top result if they hit the search button instead of clicking the list
+            self.display_info_window(self.current_matches[0])
+            self.bar.delete(0, ct.END)
+            self.result_list.place_forget()
         else:
             messagebox.showerror("Not Found", "What you're looking for is not in the system")
+
+    def display_info_window(self, entry_row):
+        """Builds and displays the Toplevel window based on the selected row data."""
+        info = ct.Toplevel(self)
+        info.title("Information")
+        info.geometry("300x225")
+        info.configure(bg = "#8B8B75")
+
+        # Fonts
+        font5 = ("Century Schoolbook", 12, "bold")
+        font6 = ("MS Sans Serif", 10, "bold")
+        font7 = ("MS Sans Serif", 10, "normal")
+
+        # Frame and title
+        frame_about = ct.Frame(info, width = 265, height = 155, bg = "#CDCDAD")
+        frame_about.place(x = 20, y = 55)
+
+        title = ct.Label(info, text = " ABOUT ", bg = "#8B8B75", fg = "#EEEEC9", font = font5)
+        title.place(x = 115, y = 20)
+        
+        # Display data directly from the passed row array
+        labels = [
+            ("Name:", entry_row[0], 25, 60, 90),
+            ("Age:", entry_row[1], 25, 85, 90),
+            ("Email:", entry_row[2], 25, 110, 90),
+            ("Contact No.:", entry_row[3], 25, 135, 120),
+            ("Vaccination:", entry_row[4], 25, 160, 160),
+            ("Exposure:", entry_row[5], 25, 185, 110)
+        ]
+
+        # Generate the info labels using a loop for cleaner code
+        for label_text, data_text, x1, y, x2 in labels:
+            ct.Label(info, text=label_text, bg="#CDCDAD", font=font6).place(x=x1, y=y)
+            ct.Label(info, text=data_text, bg="#CDCDAD", font=font7).place(x=x2, y=y)
