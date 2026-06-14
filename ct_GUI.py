@@ -22,86 +22,91 @@ class contact_tracingGUI(ct.Tk):
         title.pack(pady=40) # Packed at the top
 
         # Fonts
-        font1 = ("Century Schoolbook", 14, "bold")
-        font2 = ("Times New Roman", 13, "bold")
-        font3 = ("Times New Roman", 12, "normal")
-        font4 = ("Times New Roman", 11, "normal")
+        self.font1 = ("Century Schoolbook", 14, "bold")
+        self.font2 = ("Times New Roman", 13, "bold")
+        self.font3 = ("Times New Roman", 12, "normal")
+        self.font4 = ("Times New Roman", 11, "normal")
 
         # Frames (Stacked neatly below the title)
-        search_frame = ct.Frame(self, width = dev_x - 1000, height = 100, bg = "#EEEEC9")
-        search_frame.pack(pady=10)
+        self.search_frame = ct.Frame(self, width = dev_x - 1000, height = 100, bg = "#EEEEC9")
+        self.search_frame.pack(pady=10)
 
-        info_frame = ct.Frame(self, width = dev_x - 1000, height = 500, bg = "#EEEEC9")
-        info_frame.pack(pady=10)
+        self.info_frame = ct.Frame(self, width = dev_x - 1000, height = 500, bg = "#EEEEC9")
+        self.info_frame.pack(pady=10)
 
-        # ==========================================
-        # SEARCH SECTION (Parent is search_frame)
-        # ==========================================
-        here = Label(search_frame, text = "Search here...", bg = "#EEEEC9", fg = "#48483D", font = ("Century Schoolbook", 11, "bold"))
+        self.setup_search()
+        self.info()
+
+    # ==========================================
+    # SEARCH SECTION
+    # ==========================================
+    def setup_search(self):
+        here = Label(self.search_frame, text = "Search here...", bg = "#EEEEC9", fg = "#48483D", font = ("Century Schoolbook", 11, "bold"))
         here.place(x = 50, y = 15)
         
-        self.bar = ct.Entry(search_frame, width = 90, font = font3)
+        self.bar = ct.Entry(self.search_frame, width = 90, font = self.font3)
         self.bar.place(x = 50, y = 45)
 
         # Create the search button
-        search = ct.Button(search_frame, text = "Search", command = self.search, fg = "#48483D", font = ("Times New Roman", 10, "normal"))
-        search.place(x = 800, y = 42)
+        search_btn = ct.Button(self.search_frame, text = "Search", command = self.search, fg = "#48483D", font = ("Times New Roman", 10, "normal"))
+        search_btn.place(x = 800, y = 42)
 
+    def info(self):
         # ==========================================
         # INFORMATION SECTION (Parent is info_frame)
         # ==========================================
-        intro = Label(info_frame, text = "INFORMATION", bg = "#EEEEC9", fg = "#48483D", font = font1)
+        intro = Label(self.info_frame, text = "INFORMATION", bg = "#EEEEC9", fg = "#48483D", font = self.font1)
         intro.place(x = 50, y = 20)
 
-        name = Label(info_frame, text = "Name: ", bg = "#EEEEC9", fg = "#48483D", font = font2)
+        name = Label(self.info_frame, text = "Name: ", bg = "#EEEEC9", fg = "#48483D", font = self.font2)
         name.place(x = 50, y = 60)
-        self.e1 = ct.Entry(info_frame, width = 65, font = font3)
+        self.e1 = ct.Entry(self.info_frame, width = 65, font = self.font3)
         self.e1.place(x = 50, y = 90)
         
-        age = Label(info_frame, text = "Age: ", bg = "#EEEEC9", fg = "#48483D", font = font2)
+        age = Label(self.info_frame, text = "Age: ", bg = "#EEEEC9", fg = "#48483D", font = self.font2)
         age.place(x = 610, y = 60)
-        self.e2 = ct.Entry(info_frame, width = 25, font = font3)
+        self.e2 = ct.Entry(self.info_frame, width = 25, font = self.font3)
         self.e2.place(x = 610, y = 90)
         
-        email = Label(info_frame, text = "Email: ", bg = "#EEEEC9", fg = "#48483D", font = font2)
+        email = Label(self.info_frame, text = "Email: ", bg = "#EEEEC9", fg = "#48483D", font = self.font2)
         email.place(x = 50, y = 130)
-        self.e3 = ct.Entry(info_frame, width = 65, font = font3)
+        self.e3 = ct.Entry(self.info_frame, width = 65, font = self.font3)
         self.e3.place(x = 50, y = 160)
         
-        number = Label(info_frame, text = "Contact number: ", bg = "#EEEEC9", fg = "#48483D", font = font2)
+        number = Label(self.info_frame, text = "Contact number: ", bg = "#EEEEC9", fg = "#48483D", font = self.font2)
         number.place(x = 610, y = 130)
-        self.e4 = ct.Entry(info_frame, width = 25, font = font3)
+        self.e4 = ct.Entry(self.info_frame, width = 25, font = self.font3)
         self.e4.place(x = 610, y = 160)
         
-        health = Label(info_frame, text = "ABOUT HEALTH", bg = "#EEEEC9", fg = "#48483D", font = font1)
+        health = Label(self.info_frame, text = "ABOUT HEALTH", bg = "#EEEEC9", fg = "#48483D", font = self.font1)
         health.place(x = 50, y = 220)
 
         self.rad = StringVar()
 
-        vac = Label(info_frame, text = "Have you been vaccinated?", bg = "#EEEEC9", fg = "#48483D", font = font2)
+        vac = Label(self.info_frame, text = "Have you been vaccinated?", bg = "#EEEEC9", fg = "#48483D", font = self.font2)
         vac.place(x = 50, y = 260)
-        self.vac1 = ct.Radiobutton(info_frame, text = "Yes, first dose", value = "Partially vaccinated", variable = self.rad, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = font3)
+        self.vac1 = ct.Radiobutton(self.info_frame, text = "Yes, first dose", value = "Partially vaccinated", variable = self.rad, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = self.font3)
         self.vac1.place(x = 70, y = 290)
-        self.vac2 = ct.Radiobutton(info_frame, text = "Yes, second dose", value = "Fully vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = font3)
+        self.vac2 = ct.Radiobutton(self.info_frame, text = "Yes, second dose", value = "Fully vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = self.font3)
         self.vac2.place(x = 175, y = 290)
-        self.vac3 = ct.Radiobutton(info_frame, text = "Yes, booster", value = "Vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = font3)
+        self.vac3 = ct.Radiobutton(self.info_frame, text = "Yes, booster", value = "Vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = self.font3)
         self.vac3.place(x = 300, y = 290)
-        self.vac4 = ct.Radiobutton(info_frame, text = "Not yet", value = "Not vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = font3)
+        self.vac4 = ct.Radiobutton(self.info_frame, text = "Not yet", value = "Not vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = self.font3)
         self.vac4.place(x = 400, y = 290)
 
         self.exp = StringVar()
 
-        exp = Label(info_frame, text = "In the last 14 days, were you exposed to someone that tested positive in COVID-19?", bg = "#EEEEC9", fg = "#48483D", font = font2)
+        exp = Label(self.info_frame, text = "In the last 14 days, were you exposed to someone that tested positive in COVID-19?", bg = "#EEEEC9", fg = "#48483D", font = self.font2)
         exp.place(x = 50, y = 340)
-        self.exp1 = ct.Radiobutton(info_frame, text = "Yes", value = "Exposed", variable = self.exp, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = font3)
+        self.exp1 = ct.Radiobutton(self.info_frame, text = "Yes", value = "Exposed", variable = self.exp, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = self.font3)
         self.exp1.place(x = 70, y = 370)
-        self.exp2 = ct.Radiobutton(info_frame, text = "No", value = "Not Exposed", variable = self.exp, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = font3)
+        self.exp2 = ct.Radiobutton(self.info_frame, text = "No", value = "Not Exposed", variable = self.exp, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = self.font3)
         self.exp2.place(x = 105, y = 370)
-        self.exp3 = ct.Radiobutton(info_frame, text = "Not Sure", value = "Not Certain", variable = self.exp, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = font3)
+        self.exp3 = ct.Radiobutton(self.info_frame, text = "Not Sure", value = "Not Certain", variable = self.exp, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = self.font3)
         self.exp3.place(x = 140, y = 370)
 
         # Create the submit button (Moved up slightly to fit in the new 500px high frame)
-        submitting = Button(info_frame, text = "Submit", command = self.sub, fg = "#48483D", font = font4)
+        submitting = Button(self.info_frame, text = "Submit", command = self.sub, fg = "#48483D", font = self.font4)
         submitting.place(x = 430, y = 440)
 
     # Create function for the submit button
