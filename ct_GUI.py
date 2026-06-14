@@ -89,33 +89,71 @@ class contact_tracingGUI(ct.Tk):
         health = Label(self.info_frame, text = "ABOUT HEALTH", bg = "#EEEEC9", fg = "#48483D", font = self.font1)
         health.place(x = 50, y = 220)
 
-        self.rad = StringVar()
+        # ==========================================
+        # COLUMN 1: VACCINATION (Left Side)
+        # ==========================================
+        self.is_vac_var = StringVar()
+        self.is_vac_var.set("") 
 
-        vac = Label(self.info_frame, text = "Have you been vaccinated?", bg = "#EEEEC9", fg = "#48483D", font = self.font2)
-        vac.place(x = 50, y = 260)
-        self.vac1 = ct.Radiobutton(self.info_frame, text = "Yes, first dose", value = "Partially vaccinated", variable = self.rad, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = self.font3)
-        self.vac1.place(x = 70, y = 290)
-        self.vac2 = ct.Radiobutton(self.info_frame, text = "Yes, second dose", value = "Fully vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = self.font3)
-        self.vac2.place(x = 175, y = 290)
-        self.vac3 = ct.Radiobutton(self.info_frame, text = "Yes, booster", value = "Vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = self.font3)
-        self.vac3.place(x = 300, y = 290)
-        self.vac4 = ct.Radiobutton(self.info_frame, text = "Not yet", value = "Not vaccinated", variable= self.rad, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = self.font3)
-        self.vac4.place(x = 400, y = 290)
+        vac_base = Label(self.info_frame, text = "Have you been vaccinated?", bg = "#EEEEC9", fg = "#48483D", font = self.font2)
+        vac_base.place(x = 50, y = 260)
+        
+        # Primary Yes/No column (X = 70)
+        self.base_yes = ct.Radiobutton(self.info_frame, text="Yes", value="Yes", variable=self.is_vac_var, command=self.toggle_dose_options, indicatoron=0, bg="#EEEEC9", fg="#48483D", font=self.font3)
+        self.base_yes.place(x=70, y=290)
+        
+        self.base_no = ct.Radiobutton(self.info_frame, text="No", value="No", variable=self.is_vac_var, command=self.toggle_dose_options, indicatoron=0, bg="#EEEEC9", fg="#48483D", font=self.font3)
+        self.base_no.place(x=70, y=325) 
 
+        self.rad = StringVar() 
+        self.rad.set("")
+
+        # Secondary Dose column (Shifted right to X = 160, Y aligned with Yes/No)
+        self.vac1 = ct.Radiobutton(self.info_frame, text = "First dose", value = "Partially vaccinated", variable = self.rad, state=ct.DISABLED, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = self.font3)
+        self.vac1.place(x = 160, y = 290)
+        
+        self.vac2 = ct.Radiobutton(self.info_frame, text = "Second dose", value = "Fully vaccinated", variable= self.rad, state=ct.DISABLED, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = self.font3)
+        self.vac2.place(x = 160, y = 325)
+        
+        self.vac3 = ct.Radiobutton(self.info_frame, text = "Booster", value = "Vaccinated", variable= self.rad, state=ct.DISABLED, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = self.font3)
+        self.vac3.place(x = 160, y = 360)
+
+        # ==========================================
+        # COLUMN 2: EXPOSURE (Right Side)
+        # ==========================================
         self.exp = StringVar()
 
-        exp = Label(self.info_frame, text = "In the last 14 days, were you exposed to someone that tested positive in COVID-19?", bg = "#EEEEC9", fg = "#48483D", font = self.font2)
-        exp.place(x = 50, y = 340)
+        exp = Label(self.info_frame, text = "In the last 14 days, were you exposed to someone that tested positive in COVID-19?", bg = "#EEEEC9", fg = "#48483D", font = self.font2, wraplength=500, justify="left")
+        exp.place(x = 350, y = 260)
+        
+        # Stacked vertically (Y increases, X stays at 520)
         self.exp1 = ct.Radiobutton(self.info_frame, text = "Yes", value = "Exposed", variable = self.exp, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = self.font3)
-        self.exp1.place(x = 70, y = 370)
+        self.exp1.place(x = 370, y = 310)
+        
         self.exp2 = ct.Radiobutton(self.info_frame, text = "No", value = "Not Exposed", variable = self.exp, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = self.font3)
-        self.exp2.place(x = 105, y = 370)
+        self.exp2.place(x = 430, y = 310) 
+        
         self.exp3 = ct.Radiobutton(self.info_frame, text = "Not Sure", value = "Not Certain", variable = self.exp, indicatoron = 0, bg = "#EEEEC9", fg = "#48483D", font = self.font3)
-        self.exp3.place(x = 140, y = 370)
+        self.exp3.place(x = 490, y = 310) 
 
-        # Create the submit button
+        # ==========================================
+        # SUBMIT BUTTON
+        # ==========================================
+        # Pushed down to y=480 so it clears the new vertical buttons
         submitting = Button(self.info_frame, text = "Submit", command = self.sub, fg = "#48483D", font = self.font4)
-        submitting.place(x = 430, y = 440)
+        submitting.place(x = 430, y = 420)
+
+    def toggle_dose_options(self):
+        """Enables or disables dose options based on the Yes/No selection."""
+        if self.is_vac_var.get() == "Yes":
+            self.vac1.configure(state=ct.NORMAL)
+            self.vac2.configure(state=ct.NORMAL)
+            self.vac3.configure(state=ct.NORMAL)
+        else:
+            self.vac1.configure(state=ct.DISABLED)
+            self.vac2.configure(state=ct.DISABLED)
+            self.vac3.configure(state=ct.DISABLED)
+            self.rad.set("") # Clear the dose selection if they switch back to "No"
 
     # Create function for the submit button
     def sub(self):
